@@ -20,4 +20,7 @@ public class HuntingOrderType {
 
     @OneToMany(mappedBy = "huntingOrderType")
     private List<HuntingOrder> huntingOrderList;
+
+    @OneToMany(mappedBy = "huntingOrderType")
+    private List<Resource> resources;
 }

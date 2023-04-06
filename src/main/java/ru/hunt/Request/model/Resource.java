@@ -24,4 +24,8 @@ public class Resource {
 
     @OneToMany(mappedBy = "resource")
     private List<HuntingOrderResource> huntingOrderResources;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "hunting_order_type_id", nullable = false)
+    private HuntingOrderType huntingOrderType;
 }

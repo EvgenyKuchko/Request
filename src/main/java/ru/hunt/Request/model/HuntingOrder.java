@@ -3,6 +3,7 @@ package ru.hunt.Request.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.List;
 
 @Table
@@ -16,6 +17,7 @@ public class HuntingOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    private LocalDate date;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "person_id", nullable = false)

@@ -2,7 +2,7 @@ create table hunting_licenses
 (
     id         bigint not null,
     issue_date date,
-    number     int4      not null,
+    number     int4   not null,
     series     varchar(255),
     primary key (id)
 );
@@ -10,11 +10,11 @@ create table hunting_licenses
 create table hunting_order_resources
 (
     id               bigint not null,
-    amount           int4      not null,
+    amount           int4   not null,
     district         varchar(255),
     hunting_order_id int8,
     resource_id      int8,
-    status_id        int8      not null,
+    status_id        int8   not null,
     primary key (id)
 );
 
@@ -28,9 +28,10 @@ create table hunting_order_types
 create table hunting_orders
 (
     id                    bigint not null,
+    date                  date,
     hunting_order_type_id int8,
-    person_id             int8      not null,
-    status_id             int8      not null,
+    person_id             int8   not null,
+    status_id             int8   not null,
     primary key (id)
 );
 
@@ -45,7 +46,7 @@ create table persons
 create table quotas
 (
     id     bigint not null,
-    amount int4      not null,
+    amount int4   not null,
     finish date,
     start  date,
     primary key (id)
@@ -53,9 +54,10 @@ create table quotas
 
 create table resources
 (
-    id       bigint not null,
-    name     varchar(255),
-    quota_id int8,
+    id                    bigint not null,
+    name                  varchar(255),
+    hunting_order_type_id int8,
+    quota_id              int8,
     primary key (id)
 );
 
@@ -100,6 +102,11 @@ alter table persons
     add constraint persons_hunting_license_fk
         foreign key (hunting_license_id)
             references hunting_licenses;
+
+alter table resources
+    add constraint resources_hunting_order_type_fk
+        foreign key (hunting_order_type_id)
+            references hunting_order_types;
 
 alter table resources
     add constraint resources_quotas_fk
