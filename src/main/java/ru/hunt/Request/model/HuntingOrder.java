@@ -4,7 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.List;
+import java.util.Set;
 
 @Table
 @Entity(name = "hunting_orders")
@@ -27,8 +27,12 @@ public class HuntingOrder {
     @JoinColumn(name = "hunting_order_type_id")
     private HuntingOrderType huntingOrderType;
 
-    @OneToMany(mappedBy = "huntingOrder")
-    private List<HuntingOrderResource> huntingOrderResources;
+    @ManyToMany
+    @JoinTable(
+            name = "hunting_orders_hunting_order_resources",
+            joinColumns = @JoinColumn(name = "hunting_order_id"),
+            inverseJoinColumns = @JoinColumn(name = "hunting_order_resource_id"))
+    private Set<HuntingOrderResource> huntingOrderResources;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "status_id", nullable = false)
