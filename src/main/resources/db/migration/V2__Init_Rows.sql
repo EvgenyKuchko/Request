@@ -7,6 +7,17 @@ VALUES ( 3, 'не одобрено' );
 INSERT INTO statuses
 VALUES ( 4, 'частично одобрено' );
 
+INSERT INTO districts
+VALUES ( 1, 'центральный' );
+INSERT INTO districts
+VALUES ( 2, 'восточный' );
+INSERT INTO districts
+VALUES ( 3, 'западный' );
+INSERT INTO districts
+VALUES ( 4, 'южный' );
+INSERT INTO districts
+VALUES ( 5, 'северный' );
+
 INSERT INTO hunting_order_types
 VALUES ( 1, 'массовые виды' );
 INSERT INTO hunting_order_types

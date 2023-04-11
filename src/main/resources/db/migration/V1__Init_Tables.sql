@@ -65,6 +65,19 @@ create table statuses
     name varchar(255),
     primary key (id)
 );
+create table hunting_order_resources_districts
+(
+    hunting_order_resource_id int8 not null,
+    district_id               int8 not null,
+    primary key (hunting_order_resource_id, district_id)
+);
+create table districts
+(
+    id   bigint not null,
+    name varchar(255),
+    primary key (id)
+);
+
 alter table hunting_order_resources
     add constraint hunting_order_resources_resources_fk foreign key (resource_id) references resources;
 alter table hunting_order_resources
@@ -85,3 +98,7 @@ alter table resources
     add constraint resources_hunting_type_orders foreign key (hunting_order_type_id) references hunting_order_types;
 alter table resources
     add constraint resources_quotas foreign key (quota_id) references quotas;
+alter table hunting_order_resources_districts
+    add constraint hunting_order_resources_districts_districts_fk foreign key (district_id) references districts;
+alter table hunting_order_resources_districts
+    add constraint hunting_order_resources_districts_hunting_order_resources_fk foreign key (hunting_order_resource_id) references hunting_order_resources
