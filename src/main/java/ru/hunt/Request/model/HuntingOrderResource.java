@@ -18,12 +18,9 @@ public class HuntingOrderResource {
     private long id;
     private int amount;
 
-    @ManyToMany
-    @JoinTable(
-            name = "hunting_order_resources_districts",
-            joinColumns = @JoinColumn(name = "hunting_order_resource_id"),
-            inverseJoinColumns = @JoinColumn(name = "district_id"))
-    private Set<District> districts;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "district_id", nullable = false)
+    private District district;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "resource_id")

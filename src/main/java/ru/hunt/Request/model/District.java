@@ -21,6 +21,6 @@ public class District {
     private long id;
     private String name;
 
-    @ManyToMany(mappedBy = "districts")
-    private Set<HuntingOrderResource> huntingOrderResources;
+    @OneToMany(mappedBy = "district")
+    private List<HuntingOrderResource> huntingOrderResources;
 }
