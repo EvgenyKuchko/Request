@@ -3,6 +3,7 @@ package ru.hunt.Request.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Table
 @Entity(name = "hunting_order_resources")
@@ -16,15 +17,17 @@ public class HuntingOrderResource {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private int amount;
-    private String district;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "district_id", nullable = false)
+    private District district;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "resource_id")
     private Resource resource;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "hunting_order_id")
-    private HuntingOrder huntingOrder;
+    @ManyToMany(mappedBy = "huntingOrderResources")
+    private Set<HuntingOrder> huntingOrders;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "status_id", nullable = false)
