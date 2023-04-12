@@ -4,7 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Set;
+import java.util.List;
 
 @Table
 @Entity(name = "hunting_orders")
@@ -13,7 +13,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class HuntingOrder {
+public class HuntingOrder implements Comparable<HuntingOrder> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -27,14 +27,15 @@ public class HuntingOrder {
     @JoinColumn(name = "hunting_order_type_id")
     private HuntingOrderType huntingOrderType;
 
-    @ManyToMany
-    @JoinTable(
-            name = "hunting_orders_hunting_order_resources",
-            joinColumns = @JoinColumn(name = "hunting_order_id"),
-            inverseJoinColumns = @JoinColumn(name = "hunting_order_resource_id"))
-    private Set<HuntingOrderResource> huntingOrderResources;
+    @OneToMany(mappedBy = "huntingOrder")
+    private List<HuntingOrderResource> huntingOrderResourceList;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "status_id", nullable = false)
     private Status status;
+
+    @Override
+    public int compareTo(HuntingOrder o) {
+        return this.date.compareTo(o.getDate());
+    }
 }
