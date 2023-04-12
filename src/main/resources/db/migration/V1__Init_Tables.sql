@@ -33,8 +33,7 @@ create table hunting_orders
 create table hunting_orders_hunting_order_resources
 (
     hunting_order_id          int8 not null,
-    hunting_order_resource_id int8 not null,
-    primary key (hunting_order_id, hunting_order_resource_id)
+    hunting_order_resource_id int8 not null
 );
 create table persons
 (

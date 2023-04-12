@@ -23,3 +23,22 @@ BEGIN
         i := i + 1;
     END LOOP;
 END $$;
+
+DO $$
+DECLARE
+    i INTEGER := 1;
+    j INTEGER;
+    rnd INTEGER;
+BEGIN
+    WHILE i <= 100 LOOP
+    rnd := FLOOR(random() * 3) + 1;
+    j := 1;
+WHILE j <= rnd LOOP
+      INSERT INTO hunting_orders_hunting_order_resources (hunting_order_id, hunting_order_resource_id)
+      SELECT i,
+      (SELECT id FROM hunting_order_resources ORDER BY random() LIMIT 1);
+      j := j + 1;
+END LOOP;
+i := i + 1;
+END LOOP;
+END $$;
