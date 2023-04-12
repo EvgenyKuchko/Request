@@ -1,9 +1,14 @@
 DO $$
 DECLARE
     i INTEGER := 1;
+    y INTEGER := 1;
+    j INTEGER;
+    rnd INTEGER;
 BEGIN
-    WHILE i <= 100 LOOP
 
+    WHILE i <= 100 LOOP
+    rnd := FLOOR(random() * 3) + 1;
+    j := 1;
         INSERT INTO hunting_orders (id, date, hunting_order_type_id, person_id, status_id)
         SELECT
             i,
@@ -12,33 +17,38 @@ BEGIN
             (SELECT id FROM persons ORDER BY random() LIMIT 1),
             (SELECT id FROM statuses WHERE id = 1);
 
-        INSERT INTO hunting_order_resources(id, amount, district_id, resource_id, status_id)
+    WHILE j <= rnd LOOP
+        INSERT INTO hunting_order_resources(id, amount, district_id, resource_id, hunting_order_id, status_id)
         SELECT
-            i,
+            y,
             (SELECT FLOOR(random() * 5) + 1),
             (SELECT id FROM districts ORDER BY random() LIMIT 1),
             (SELECT id FROM resources ORDER BY random() LIMIT 1),
+            i,
             (SELECT id FROM statuses WHERE id = 1);
+            j := j + 1;
+            y := y + 1;
+            END LOOP;
 
         i := i + 1;
     END LOOP;
 END $$;
 
-DO $$
-DECLARE
-    i INTEGER := 1;
-    j INTEGER;
-    rnd INTEGER;
-BEGIN
-    WHILE i <= 100 LOOP
-    rnd := FLOOR(random() * 3) + 1;
-    j := 1;
-WHILE j <= rnd LOOP
-      INSERT INTO hunting_orders_hunting_order_resources (hunting_order_id, hunting_order_resource_id)
-      SELECT i,
-      (SELECT id FROM hunting_order_resources ORDER BY random() LIMIT 1);
-      j := j + 1;
-END LOOP;
-i := i + 1;
-END LOOP;
-END $$;
+-- DO $$
+-- DECLARE
+--     i INTEGER := 1;
+--     j INTEGER;
+--     rnd INTEGER;
+-- BEGIN
+--     WHILE i <= 100 LOOP
+--     rnd := FLOOR(random() * 3) + 1;
+--     j := 1;
+-- WHILE j <= rnd LOOP
+--       INSERT INTO hunting_orders_hunting_order_resources (hunting_order_id, hunting_order_resource_id)
+--       SELECT i,
+--       (SELECT id FROM hunting_order_resources ORDER BY random() LIMIT 1);
+--       j := j + 1;
+-- END LOOP;
+-- i := i + 1;
+-- END LOOP;
+-- END $$;

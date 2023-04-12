@@ -8,11 +8,12 @@ create table hunting_licenses
 );
 create table hunting_order_resources
 (
-    id          bigint not null,
-    amount      int4   not null,
-    district_id int8,
-    resource_id int8,
-    status_id   int8   not null,
+    id               bigint not null,
+    amount           int4   not null,
+    district_id      int8,
+    resource_id      int8,
+    hunting_order_id int8,
+    status_id        int8   not null,
     primary key (id)
 );
 create table hunting_order_types
@@ -29,11 +30,6 @@ create table hunting_orders
     person_id             int8   not null,
     status_id             int8   not null,
     primary key (id)
-);
-create table hunting_orders_hunting_order_resources
-(
-    hunting_order_id          int8 not null,
-    hunting_order_resource_id int8 not null
 );
 create table persons
 (
@@ -76,6 +72,8 @@ alter table hunting_order_resources
 alter table hunting_order_resources
     add constraint hunting_order_resources_statuses_fk foreign key (status_id) references statuses;
 alter table hunting_order_resources
+    add constraint hunting_order_resources_hunting_orders_fk foreign key (hunting_order_id) references hunting_orders;
+alter table hunting_orders
     add constraint hunting_order_resources_districts_fk foreign key (status_id) references districts;
 alter table hunting_orders
     add constraint hunting_orders_hunting_order_type_fk foreign key (hunting_order_type_id) references hunting_order_types;
@@ -83,10 +81,6 @@ alter table hunting_orders
     add constraint hunting_orders_persons_fk foreign key (person_id) references persons;
 alter table hunting_orders
     add constraint hunting_orders_statuses_fk foreign key (status_id) references statuses;
-alter table hunting_orders_hunting_order_resources
-    add constraint hunting_orders_resources_hunting_orders_resources foreign key (hunting_order_resource_id) references hunting_order_resources;
-alter table hunting_orders_hunting_order_resources
-    add constraint hunting_orders_resources_hunting_orders foreign key (hunting_order_id) references hunting_orders;
 alter table persons
     add constraint persons_hunting_licenses foreign key (hunting_license_id) references hunting_licenses;
 alter table resources
