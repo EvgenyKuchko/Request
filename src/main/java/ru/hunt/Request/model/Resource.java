@@ -3,6 +3,7 @@ package ru.hunt.Request.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.List;
 
 @Table
@@ -16,10 +17,9 @@ public class Resource {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "quota_id", referencedColumnName = "id")
-    private Quota quota;
+    private int amount;
+    private LocalDate start;
+    private LocalDate finish;
 
 //    @OneToMany(mappedBy = "resource")
 //    private List<HuntingOrderResource> huntingOrderResources;
