@@ -11,7 +11,6 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 public class Quota {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,6 +19,6 @@ public class Quota {
     private LocalDate start;
     private LocalDate finish;
 
-    @OneToOne(mappedBy = "quota")
-    private Resource resource;
+//    @OneToOne(mappedBy = "quota")
+//    private Resource resource;
 }

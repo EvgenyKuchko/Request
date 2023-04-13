@@ -11,7 +11,6 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 public class Resource {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,8 +21,8 @@ public class Resource {
     @JoinColumn(name = "quota_id", referencedColumnName = "id")
     private Quota quota;
 
-    @OneToMany(mappedBy = "resource")
-    private List<HuntingOrderResource> huntingOrderResources;
+//    @OneToMany(mappedBy = "resource")
+//    private List<HuntingOrderResource> huntingOrderResources;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "hunting_order_type_id", nullable = false)

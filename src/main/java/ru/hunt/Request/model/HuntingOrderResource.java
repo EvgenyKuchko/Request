@@ -10,7 +10,6 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 public class HuntingOrderResource {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

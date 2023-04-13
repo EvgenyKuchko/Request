@@ -14,13 +14,12 @@ import java.util.Set;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 public class District {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
 
-    @OneToMany(mappedBy = "district")
-    private List<HuntingOrderResource> huntingOrderResources;
+//    @OneToMany(mappedBy = "district")
+//    private List<HuntingOrderResource> huntingOrderResources;
 }

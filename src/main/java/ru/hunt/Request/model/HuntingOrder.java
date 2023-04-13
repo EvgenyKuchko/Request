@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class HuntingOrder implements Comparable<HuntingOrder> {
+public class HuntingOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -27,15 +27,10 @@ public class HuntingOrder implements Comparable<HuntingOrder> {
     @JoinColumn(name = "hunting_order_type_id")
     private HuntingOrderType huntingOrderType;
 
-    @OneToMany(mappedBy = "huntingOrder")
-    private List<HuntingOrderResource> huntingOrderResourceList;
+//    @OneToMany(mappedBy = "huntingOrder")
+//    private List<HuntingOrderResource> huntingOrderResourceList;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "status_id", nullable = false)
     private Status status;
-
-    @Override
-    public int compareTo(HuntingOrder o) {
-        return this.date.compareTo(o.getDate());
-    }
 }

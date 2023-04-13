@@ -22,6 +22,6 @@ public class Person {
     @JoinColumn(name = "hunting_license_id", referencedColumnName = "id")
     private HuntingLicense huntingLicense;
 
-    @OneToMany(mappedBy = "person")
-    private List<HuntingOrder> huntingOrderList;
+//    @OneToMany(mappedBy = "person")
+//    private List<HuntingOrder> huntingOrderList;
 }
