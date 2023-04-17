@@ -3,10 +3,7 @@ package ru.hunt.Request.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.hunt.Request.model.HuntingOrder;
-import ru.hunt.Request.model.HuntingOrderResource;
-import ru.hunt.Request.model.Resource;
-import ru.hunt.Request.model.Status;
+import ru.hunt.Request.model.*;
 import ru.hunt.Request.repository.HuntingOrderRepository;
 
 import java.time.LocalDate;
@@ -29,15 +26,12 @@ public class HuntingOrderService {
     }
 
     @Transactional
-    public void declineTheOrder(HuntingOrder huntingOrder, Status status) {
+    public void changeOrderStatus(HuntingOrder huntingOrder, Status status) {
         huntingOrderRepository.changeOrderStatus(status, huntingOrder.getId());
     }
 
-    public boolean checkDate(LocalDate orderDate, List<HuntingOrderResource> orderResources) {
-        for(HuntingOrderResource resource : orderResources) {
-            Resource r = resource.getResource();
-
-        }
-        return true;
+    @Transactional
+    public List<HuntingOrder> getOrderByPersonAndStatus(Person person, Status a, Status pa) {
+        return huntingOrderRepository.getOrderByPersonAndStatus(person, a, pa);
     }
 }

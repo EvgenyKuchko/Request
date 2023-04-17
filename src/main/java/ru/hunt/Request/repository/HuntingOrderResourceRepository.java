@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import ru.hunt.Request.model.HuntingOrder;
 import ru.hunt.Request.model.HuntingOrderResource;
+import ru.hunt.Request.model.Person;
 import ru.hunt.Request.model.Status;
 
 import java.util.List;
@@ -16,7 +17,12 @@ public interface HuntingOrderResourceRepository extends JpaRepository<HuntingOrd
 
     @Modifying
     @Query("update hunting_order_resources hor set hor.status = :status where hor.huntingOrder = :huntingOrder")
-    void changeResourceStatus(@Param("status") Status status, @Param("huntingOrder") HuntingOrder huntingOrder);
+    void changeResourceStatusByOrder(@Param("status") Status status, @Param("huntingOrder") HuntingOrder huntingOrder);
 
+    @Modifying
+    @Query("update hunting_order_resources hor set hor.status = :status where hor.id = :id")
+    void changeResourceStatus(@Param("status") Status status, @Param("id") Long id);
 
+    @Query("SELECT hor FROM hunting_order_resources hor WHERE hor.huntingOrder.person = :person AND hor.status = :status")
+    List<HuntingOrderResource> getAllAcceptedResourcesByPerson(@Param("person") Person person, Status status);
 }

@@ -21,8 +21,8 @@ public class Resource {
     private LocalDate start;
     private LocalDate finish;
 
-//    @OneToMany(mappedBy = "resource")
-//    private List<HuntingOrderResource> huntingOrderResources;
+    @OneToMany(mappedBy = "resource")
+    private List<HuntingOrderResource> huntingOrderResources;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "hunting_order_type_id", nullable = false)

@@ -23,10 +23,27 @@ public class TestController {
     @Autowired
     private StatusService statusService;
 
-    @GetMapping("/test")
+    @GetMapping("/start")
+    public String getStart() {
+        requestService.checkRequests();
+        return "completed";
+    }
+
+    @GetMapping("/unreviewed")
     public List<HuntingOrder> getUnreviewedOrders() {
         Status status = statusService.getStatusByName("на рассмотрении");
-        List<HuntingOrder> result = huntingOrderService.getUnreviewedSortedOrders(status);
-        return result;
+        return huntingOrderService.getUnreviewedSortedOrders(status);
+    }
+
+    @GetMapping("/accepted")
+    public List<HuntingOrder> getAcceptedOrders() {
+        Status status = statusService.getStatusByName("одобрено");
+        return huntingOrderService.getUnreviewedSortedOrders(status);
+    }
+
+    @GetMapping("/p_accepted")
+    public List<HuntingOrder> getPartiallyAcceptedOrders() {
+        Status status = statusService.getStatusByName("частично одобрено");
+        return huntingOrderService.getUnreviewedSortedOrders(status);
     }
 }

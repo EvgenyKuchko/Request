@@ -1,5 +1,6 @@
 package ru.hunt.Request.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
