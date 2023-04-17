@@ -38,20 +38,14 @@ create table persons
     hunting_license_id int8,
     primary key (id)
 );
-create table quotas
-(
-    id     bigint not null,
-    amount int4   not null,
-    finish date,
-    start  date,
-    primary key (id)
-);
 create table resources
 (
     id                    bigint not null,
     name                  varchar(255),
     hunting_order_type_id int8   not null,
-    quota_id              int8,
+    amount int4   not null,
+    finish date,
+    start  date,
     primary key (id)
 );
 create table statuses
@@ -85,5 +79,3 @@ alter table persons
     add constraint persons_hunting_licenses foreign key (hunting_license_id) references hunting_licenses;
 alter table resources
     add constraint resources_hunting_type_orders foreign key (hunting_order_type_id) references hunting_order_types;
-alter table resources
-    add constraint resources_quotas foreign key (quota_id) references quotas;

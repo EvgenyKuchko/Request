@@ -1,8 +1,12 @@
 package ru.hunt.Request.model;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Table
 @Entity(name = "hunting_order_resources")
@@ -10,7 +14,6 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 public class HuntingOrderResource {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,4 +35,17 @@ public class HuntingOrderResource {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "status_id", nullable = false)
     private Status status;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        HuntingOrderResource that = (HuntingOrderResource) o;
+        return Objects.equals(resource, that.resource);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(resource);
+    }
 }

@@ -11,16 +11,15 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 public class HuntingOrderType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String type;
 
-    @OneToMany(mappedBy = "huntingOrderType")
-    private List<HuntingOrder> huntingOrderList;
+//    @OneToMany(mappedBy = "huntingOrderType")
+//    private List<HuntingOrder> huntingOrderList;
 
-    @OneToMany(mappedBy = "huntingOrderType")
-    private List<Resource> resources;
+//    @OneToMany(mappedBy = "huntingOrderType")
+//    private List<Resource> resources;
 }

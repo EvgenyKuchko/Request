@@ -20,6 +20,6 @@ public class HuntingLicense {
     private int number;
     private LocalDate issueDate;
 
-    @OneToOne(mappedBy = "huntingLicense")
-    private Person person;
+//    @OneToOne(mappedBy = "huntingLicense")
+//    private Person person;
 }

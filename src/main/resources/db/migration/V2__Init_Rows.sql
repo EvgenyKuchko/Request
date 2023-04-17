@@ -23,47 +23,26 @@ VALUES ( 1, 'массовые виды' );
 INSERT INTO hunting_order_types
 VALUES ( 2, 'жеребьёвочные виды' );
 
-INSERT INTO quotas
-VALUES ( 1, 50, '01.05.2023', '30.05.2023' );
-INSERT INTO quotas
-VALUES ( 2, 70, '01.05.2023', '30.05.2023' );
-INSERT INTO quotas
-VALUES ( 3, 50, '01.05.2023', '30.05.2023' );
-INSERT INTO quotas
-VALUES ( 4, 20, '01.05.2023', '30.05.2023' );
-INSERT INTO quotas
-VALUES ( 5, 40, '01.05.2023', '30.05.2023' );
-INSERT INTO quotas
-VALUES ( 6, 10, '15.05.2023', '15.06.2023' );
-INSERT INTO quotas
-VALUES ( 7, 15, '15.05.2023', '15.06.2023' );
-INSERT INTO quotas
-VALUES ( 8, 20, '15.05.2023', '15.06.2023' );
-INSERT INTO quotas
-VALUES ( 9, 20, '15.05.2023', '15.06.2023' );
-INSERT INTO quotas
-VALUES ( 10, 10, '15.05.2023', '15.06.2023' );
-
 INSERT INTO resources
-VALUES ( 1, 'ласка', 1, 1);
+VALUES ( 1, 'ласка', 1, 50, '01.05.2023', '30.05.2023');
 INSERT INTO resources
-VALUES ( 2, 'горностай', 1, 2 );
+VALUES ( 2, 'горностай', 1, 70, '01.05.2023', '30.05.2023' );
 INSERT INTO resources
-VALUES ( 3, 'белка', 1, 3 );
+VALUES ( 3, 'белка', 1, 50, '01.05.2023', '30.05.2023' );
 INSERT INTO resources
-VALUES ( 4, 'бурундук', 1, 4 );
+VALUES ( 4, 'бурундук', 1, 20, '01.05.2023', '30.05.2023' );
 INSERT INTO resources
-VALUES ( 5, 'суслик', 1, 5 );
+VALUES ( 5, 'суслик', 1, 40, '01.05.2023', '30.05.2023' );
 INSERT INTO resources
-VALUES ( 6, 'волк', 2, 6 );
+VALUES ( 6, 'волк', 2, 10, '15.05.2023', '15.06.2023' );
 INSERT INTO resources
-VALUES ( 7, 'медведь', 2, 7 );
+VALUES ( 7, 'медведь', 2, 15, '15.05.2023', '15.06.2023' );
 INSERT INTO resources
-VALUES ( 8, 'кабан', 2, 8 );
+VALUES ( 8, 'кабан', 2, 20, '15.05.2023', '15.06.2023' );
 INSERT INTO resources
-VALUES ( 9, 'рысь', 2, 9 );
+VALUES ( 9, 'рысь', 2, 20, '15.05.2023', '15.06.2023' );
 INSERT INTO resources
-VALUES ( 10, 'лось', 2, 10 );
+VALUES ( 10, 'лось', 2, 10, '15.05.2023', '15.06.2023' );
 
 INSERT INTO hunting_licenses
 VALUES ( 1, '10.12.2022', 1512, 'AA' );
@@ -106,4 +85,3 @@ INSERT INTO persons
 VALUES ( 9, 'Артёмов Артём Артёмович', 9 );
 INSERT INTO persons
 VALUES ( 10, 'Витальев Виталий Витальевич', 10 );
-
