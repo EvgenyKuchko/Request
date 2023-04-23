@@ -25,7 +25,7 @@ public class HuntingOrderResource {
     private District district;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "resource_id")
+    @JoinColumn(name = "resource_id", nullable = false)
     private Resource resource;
 
     @ManyToOne(cascade = CascadeType.ALL)

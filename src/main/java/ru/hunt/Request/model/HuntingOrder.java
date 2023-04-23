@@ -25,7 +25,7 @@ public class HuntingOrder {
     private Person person;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "hunting_order_type_id")
+    @JoinColumn(name = "hunting_order_type_id", nullable = false)
     private HuntingOrderType huntingOrderType;
 
 //    @OneToMany(mappedBy = "huntingOrder")
