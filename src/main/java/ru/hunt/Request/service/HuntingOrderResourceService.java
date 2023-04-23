@@ -36,7 +36,7 @@ public class HuntingOrderResourceService {
 
     public boolean checkDate(LocalDate orderDate, HuntingOrderResource orderResource) {
         Resource r = orderResource.getResource();
-        return orderDate.isAfter(r.getStart()) && orderDate.isBefore(r.getFinish());
+        return orderDate.isAfter(r.getStart().minusDays(1)) && orderDate.isBefore(r.getFinish().plusDays(1));
     }
 
     @Transactional
@@ -46,6 +46,6 @@ public class HuntingOrderResourceService {
 
     @Transactional
     public List<HuntingOrderResource> getAllAcceptedResourcesByPerson(Person person, Status status) {
-        return huntingOrderResourceRepository.getAllAcceptedResourcesByPerson(person, status);
+        return huntingOrderResourceRepository.getAllResourcesByPersonAndStatus(person, status);
     }
 }

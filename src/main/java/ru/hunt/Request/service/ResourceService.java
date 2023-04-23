@@ -13,6 +13,7 @@ public class ResourceService {
 
     @Transactional
     public void changeAmount(Resource resource, int amount) {
-        resourceRepository.changeAmount(amount, resource.getId());
+        var res = resource.getAmount() - amount;
+        resourceRepository.changeAmount(res, resource.getId());
     }
 }

@@ -1,5 +1,7 @@
 package ru.hunt.Request.controller;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,7 +14,9 @@ import ru.hunt.Request.service.StatusService;
 import java.util.List;
 
 @RestController
-public class TestController {
+@Getter
+@Setter
+public class ActionController {
 
     @Autowired
     private RequestService requestService;
@@ -54,7 +58,7 @@ public class TestController {
 
     @GetMapping("/unreviewed")
     public List<HuntingOrder> getUnreviewedOrders() {
-        Status status = statusService.getStatusByName("UNREVIEWED_STATUS");
+        Status status = statusService.getStatusByName(UNREVIEWED_STATUS);
         return huntingOrderService.getUnreviewedSortedOrders(status);
     }
 

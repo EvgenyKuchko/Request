@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.hunt.Request.model.HuntingOrder;
 import ru.hunt.Request.model.HuntingOrderResource;
+import ru.hunt.Request.model.Status;
 
 import java.time.LocalDate;
 import java.util.Iterator;
@@ -35,6 +36,9 @@ public class RequestService {
         var huntingOrderResources = huntingOrderResourceService.getResourcesByOrder(order);
         var horStartSize = huntingOrderResources.size();
         checkType(huntingOrderResources, order);
+        if (huntingOrderResources.size() == 0) {
+            return;
+        }
         checkSameResource(huntingOrderResources);
         checkOrderByDate(order.getDate(), huntingOrderResources);
         checkDistrict(order, huntingOrderResources);
@@ -45,19 +49,24 @@ public class RequestService {
     private void checkType(List<HuntingOrderResource> hor, HuntingOrder order) {
         var type = order.getHuntingOrderType().getType();
         if (!huntingOrderResourceService.checkOrderType(hor, type)) {
-            huntingOrderService.changeOrderStatus(order, statusService.getStatusByName(NOT_APPROVED_STATUS));
-            huntingOrderResourceService.changeResourcesStatusByOrder(order, statusService.getStatusByName(NOT_APPROVED_STATUS));
+            Status notApproved = statusService.getStatusByName(NOT_APPROVED_STATUS);
+            huntingOrderService.changeOrderStatus(order, notApproved);
+            huntingOrderResourceService.changeResourcesStatusByOrder(order, notApproved);
             hor.clear();
         }
     }
 
     private void checkOrderByDate(LocalDate date, List<HuntingOrderResource> orderResources) {
-        for (HuntingOrderResource or : orderResources) {
+        Iterator<HuntingOrderResource> iterator = orderResources.iterator();
+        while (iterator.hasNext()) {
+            HuntingOrderResource or = iterator.next();
             if (!huntingOrderResourceService.checkDate(date, or)) {
                 huntingOrderResourceService.changeResourceStatus(or, statusService.getStatusByName(NOT_APPROVED_STATUS));
+                if (or.getStatus().equals(statusService.getStatusByName(NOT_APPROVED_STATUS))) {
+                    iterator.remove();
+                }
             }
         }
-        orderResources.removeIf(hor -> hor.getStatus().equals(statusService.getStatusByName(NOT_APPROVED_STATUS)));
     }
 
     private void checkDistrict(HuntingOrder ho, List<HuntingOrderResource> hor) {
@@ -81,8 +90,8 @@ public class RequestService {
     }
 
     private void checkResourceQuota(List<HuntingOrderResource> hor, HuntingOrder ho) {
-        List<HuntingOrderResource> copy = new CopyOnWriteArrayList<>(hor);
-        if (!copy.isEmpty()) {
+        if (!hor.isEmpty()) {
+            List<HuntingOrderResource> copy = new CopyOnWriteArrayList<>(hor);
             for (HuntingOrderResource orderResource : copy) {
                 var resource = orderResource.getResource();
                 if (resource.getAmount() < orderResource.getAmount()) {
@@ -101,15 +110,16 @@ public class RequestService {
             List<HuntingOrderResource> dis = hor.stream()
                     .distinct()
                     .collect(Collectors.toList());
-
-            for (HuntingOrderResource res : dis) {
-                Iterator<HuntingOrderResource> iterator = hor.iterator();
-                while (iterator.hasNext()) {
-                    HuntingOrderResource orderResource = iterator.next();
-                    if (orderResource.getId() != res.getId() &&
-                            orderResource.getResource().getName().equals(res.getResource().getName())) {
-                        huntingOrderResourceService.changeResourceStatus(orderResource, statusService.getStatusByName(NOT_APPROVED_STATUS));
-                        iterator.remove();
+            if (hor.size() > dis.size()) {
+                for (HuntingOrderResource res : dis) {
+                    Iterator<HuntingOrderResource> iterator = hor.iterator();
+                    while (iterator.hasNext()) {
+                        HuntingOrderResource orderResource = iterator.next();
+                        if (orderResource.getId() != res.getId() &&
+                                orderResource.getResource().getName().equals(res.getResource().getName())) {
+                            huntingOrderResourceService.changeResourceStatus(orderResource, statusService.getStatusByName(NOT_APPROVED_STATUS));
+                            iterator.remove();
+                        }
                     }
                 }
             }
