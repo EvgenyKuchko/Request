@@ -52,7 +52,7 @@ public class ActionControllerTest {
     }
 
     @Test
-    public void testGetStart() {
+    public void getStart_ShouldStartCheckingAndReturnFinished() {
         var result = actionController.getStart();
 
         assertEquals("check finished", result);
