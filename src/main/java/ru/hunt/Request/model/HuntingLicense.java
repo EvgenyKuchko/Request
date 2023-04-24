@@ -19,7 +19,4 @@ public class HuntingLicense {
     private String series;
     private int number;
     private LocalDate issueDate;
-
-//    @OneToOne(mappedBy = "huntingLicense")
-//    private Person person;
 }

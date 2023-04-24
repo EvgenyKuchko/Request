@@ -64,7 +64,7 @@ public class RequestServiceTest {
     }
 
     @Test
-    public void testCheckType_IfTrue() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    public void checkType_IfTrue() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         Method checkTypeMethod = RequestService.class.getDeclaredMethod("checkType", List.class, HuntingOrder.class);
         checkTypeMethod.setAccessible(true);
         when(huntingOrderResourceService.checkOrderType(orderResources, huntingOrder.getHuntingOrderType().getType())).thenReturn(true);
@@ -77,7 +77,7 @@ public class RequestServiceTest {
     }
 
     @Test
-    public void testCheckType_IfFalse() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    public void checkType_IfFalse() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         Method checkTypeMethod = RequestService.class.getDeclaredMethod("checkType", List.class, HuntingOrder.class);
         checkTypeMethod.setAccessible(true);
         Status notApproved = new Status();
@@ -95,7 +95,7 @@ public class RequestServiceTest {
     }
 
     @Test
-    public void CheckOrderByDate_CorrectDates() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    public void checkOrderByDate_CorrectDates() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         Method checkOrderMethod = RequestService.class.getDeclaredMethod("checkOrderByDate", LocalDate.class, List.class);
         checkOrderMethod.setAccessible(true);
         LocalDate date = LocalDate.now();
@@ -121,7 +121,7 @@ public class RequestServiceTest {
     }
 
     @Test
-    public void CheckOrderByDate_wrongDates() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    public void checkOrderByDate_wrongDates() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         Method checkOrderMethod = RequestService.class.getDeclaredMethod("checkOrderByDate", LocalDate.class, List.class);
         checkOrderMethod.setAccessible(true);
         LocalDate date = LocalDate.now();
@@ -146,7 +146,7 @@ public class RequestServiceTest {
     }
 
     @Test
-    public void testCheckDistrict_NoResources() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    public void checkDistrict_NoResources() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         Method checkDistrictMethod = RequestService.class.getDeclaredMethod("checkDistrict", HuntingOrder.class, List.class);
         checkDistrictMethod.setAccessible(true);
         Person person = new Person();
@@ -161,7 +161,7 @@ public class RequestServiceTest {
     }
 
     @Test
-    public void testCheckDistrict_NoAcceptedResources() throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
+    public void checkDistrict_NoAcceptedResources() throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
         Method checkDistrictMethod = RequestService.class.getDeclaredMethod("checkDistrict", HuntingOrder.class, List.class);
         checkDistrictMethod.setAccessible(true);
         HuntingOrder ho = new HuntingOrder();
@@ -185,7 +185,7 @@ public class RequestServiceTest {
     }
 
     @Test
-    public void testCheckDistrictMatch() throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
+    public void checkDistrictMatch() throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
         Method checkDistrictMethod = RequestService.class.getDeclaredMethod("checkDistrict", HuntingOrder.class, List.class);
         checkDistrictMethod.setAccessible(true);
         HuntingOrder ho = new HuntingOrder();

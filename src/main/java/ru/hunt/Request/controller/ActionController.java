@@ -6,12 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.hunt.Request.model.HuntingOrder;
-import ru.hunt.Request.model.Status;
 import ru.hunt.Request.service.HuntingOrderService;
 import ru.hunt.Request.service.RequestService;
 import ru.hunt.Request.service.StatusService;
-
-import java.util.List;
 
 @RestController
 @Getter
@@ -54,29 +51,5 @@ public class ActionController {
         } else {
             return "check already stopped";
         }
-    }
-
-    @GetMapping("/unreviewed")
-    public List<HuntingOrder> getUnreviewedOrders() {
-        Status status = statusService.getStatusByName(UNREVIEWED_STATUS);
-        return huntingOrderService.getUnreviewedSortedOrders(status);
-    }
-
-    @GetMapping("/accepted")
-    public List<HuntingOrder> getAcceptedOrders() {
-        Status status = statusService.getStatusByName(APPROVED_STATUS);
-        return huntingOrderService.getUnreviewedSortedOrders(status);
-    }
-
-    @GetMapping("/p_accepted")
-    public List<HuntingOrder> getPartiallyAcceptedOrders() {
-        Status status = statusService.getStatusByName(PARTIALLY_APPROVED_STATUS);
-        return huntingOrderService.getUnreviewedSortedOrders(status);
-    }
-
-    @GetMapping("/not_accepted")
-    public List<HuntingOrder> getNotAcceptedOrders() {
-        Status status = statusService.getStatusByName(NOT_APPROVED_STATUS);
-        return huntingOrderService.getUnreviewedSortedOrders(status);
     }
 }

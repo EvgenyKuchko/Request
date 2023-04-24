@@ -1,9 +1,11 @@
 package ru.hunt.Request.model;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Table
 @Entity(name = "hunting_order_types")
@@ -16,10 +18,4 @@ public class HuntingOrderType {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String type;
-
-//    @OneToMany(mappedBy = "huntingOrderType")
-//    private List<HuntingOrder> huntingOrderList;
-
-//    @OneToMany(mappedBy = "huntingOrderType")
-//    private List<Resource> resources;
 }

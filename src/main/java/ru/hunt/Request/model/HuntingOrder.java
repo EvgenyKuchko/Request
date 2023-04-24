@@ -1,11 +1,9 @@
 package ru.hunt.Request.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.List;
 
 @Table
 @Entity(name = "hunting_orders")
@@ -27,9 +25,6 @@ public class HuntingOrder {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "hunting_order_type_id", nullable = false)
     private HuntingOrderType huntingOrderType;
-
-//    @OneToMany(mappedBy = "huntingOrder")
-//    private List<HuntingOrderResource> huntingOrderResourceList;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "status_id", nullable = false)

@@ -32,7 +32,7 @@ public class HuntingOrderRepositoryTest {
     private EntityManager entityManager;
 
     @Test
-    public void testGetOrderByStatus() {
+    public void getOrderByStatus_ShouldReturnOrders() {
         Status unreviewed = new Status();
         unreviewed.setName("на рассмотрении");
         statusRepository.save(unreviewed);
@@ -53,7 +53,7 @@ public class HuntingOrderRepositoryTest {
     }
 
     @Test
-    public void testChangeOrderStatus() {
+    public void changeOrderStatus_ShouldChangeStatusOrder() {
         Status unreviewed = new Status();
         unreviewed.setName("на рассмотрении");
         statusRepository.save(unreviewed);
